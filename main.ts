@@ -6,7 +6,7 @@
 namespace paj7620 {
 
     
-    var initRegisterArray = [	// Initial Gesture
+    let initRegisterArray = [	// Initial Gesture
         [0xEF,0x00],
         [0x32,0x29],
         [0x33,0x01],
@@ -228,7 +228,7 @@ namespace paj7620 {
         [0x7E,0x01],
     ];
 
-    function PAJ7620_VAL(val, maskbit): number{
+    function PAJ7620_VAL(val: number, maskbit: number): number{
         return val << maskbit;
     }
 
@@ -321,7 +321,7 @@ namespace paj7620 {
     
     
 	function paj7620ReadReg(addr: number, qty: number): number{
-        var error;
+        let error;
         let buff = pins.createBuffer(1);
         buff[0] = addr;
         pins.i2cWriteBuffer(PAJ7620_ID, buff);
@@ -379,33 +379,33 @@ namespace paj7620 {
      */
     //% block
     export function paj7620Init(): boolean{
-        var i = 0;
-		var error;
-		var data0 = 0, data1 = 0;
+        let i = 0;
+		let error;
+		let data0 = 0, data1 = 0;
 		//wakeup the sensor
 		basic.pause(700);	//Wait 700us for PAJ7620U2 to stabilize	
 
-		paj7620SelectBank(bank_e.BANK0);
-		paj7620SelectBank(bank_e.BANK0);
+		// paj7620SelectBank(bank_e.BANK0);
+		// paj7620SelectBank(bank_e.BANK0);
 
-		data0 = paj7620ReadReg(0, 1);
-        data1 = paj7620ReadReg(1, 1);
+		// data0 = paj7620ReadReg(0, 1);
+        // data1 = paj7620ReadReg(1, 1);
         
-		if ( (data0 != 0x20 ) || (data1 != 0x76) )
-		{
-			return false;
-		}
-		// if ( data0 == 0x20 )
+		// if ( (data0 != 0x20 ) || (data1 != 0x76) )
 		// {
-		// 	Serial.println("wake-up finish.");
+		// 	return false;
+		// }
+		// // if ( data0 == 0x20 )
+		// // {
+		// // 	Serial.println("wake-up finish.");
+		// // }
+		
+		// for (i = 0; i < INIT_REG_ARRAY_SIZE; i++) 
+		// {
+		// 	paj7620WriteReg(initRegisterArray[i][0], initRegisterArray[i][1]);
 		// }
 		
-		for (i = 0; i < INIT_REG_ARRAY_SIZE; i++) 
-		{
-			paj7620WriteReg(initRegisterArray[i][0], initRegisterArray[i][1]);
-		}
-		
-		paj7620SelectBank(bank_e.BANK0);  //gesture flage reg in Bank0
+		// paj7620SelectBank(bank_e.BANK0);  //gesture flage reg in Bank0
 		
 		return true;
     }
@@ -416,7 +416,7 @@ namespace paj7620 {
      */
     //% block
     export function ReadGesture(): number{
-        var data = 0, data1 = 0, error;
+        let data = 0, data1 = 0, error;
 		data = paj7620ReadReg(0x43, 1);				// Read Bank_0_Reg_0x43/0x44 for gesture result.
 	
         switch (data) 									// When different gestures be detected, the variable 'data' will be set to different values by paj7620ReadReg(0x43, 1, &data).
@@ -473,7 +473,7 @@ namespace paj7620 {
                     return GES_UP_FLAG;
                 }
             case GES_DOWN_FLAG:
-                delay(GES_ENTRY_TIME);
+                basic.pause(GES_ENTRY_TIME);
                 data = paj7620ReadReg(0x43, 1);
                 if(data == GES_FORWARD_FLAG) 
                 {
