@@ -319,14 +319,7 @@ namespace paj7620 {
 		// return i;
     }
     
-    	/**************************************************************** 
-	 * Function Name: paj7620ReadReg
-	 * Description:  PAJ7620 read reg data
-	 * Parameters: addr:reg address;
-	 *			   qty:number of data to read, addr continuously increase;
-	*			   data[]:storage memory start address
-	* Return: error code; success: return 0
-	****************************************************************/ 
+    
 	function paj7620ReadReg(addr: number, qty: number): number{
         var error;
         let buff = pins.createBuffer(1);
@@ -367,12 +360,7 @@ namespace paj7620 {
     */
     }
     
-    /**************************************************************** 
-	 * Function Name: paj7620SelectBank
-	 * Description:  PAJ7620 select register bank
-	 * Parameters: BANK0, BANK1
-	 * Return: none
-	****************************************************************/ 
+ 
 	function paj7620SelectBank(bank: bank_e): void{
 		switch(bank){
 			case bank_e.BANK0:
@@ -385,13 +373,10 @@ namespace paj7620 {
 				break;
 		}
     }
-    
-      /**************************************************************** 
-	 * Function Name: paj7620Init
-	 * Description:  PAJ7620 REG INIT
-	 * Parameters: none
-	 * Return: success
-	****************************************************************/ 
+
+    /** 
+     * TODO: 在此处描述您的函数
+     */
     //% block
     export function paj7620Init(): boolean{
         var i = 0;
@@ -424,6 +409,7 @@ namespace paj7620 {
 		
 		return true;
     }
+
 
     /** 
      * TODO: 在此处描述您的函数
