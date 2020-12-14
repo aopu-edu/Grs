@@ -3,9 +3,8 @@
  * 自定义图形块
  */
 //% weight=100 color=#0fbc11 icon=""
-namespace paj7620 {
+namespace aopu_gesture {
     
-
     function PAJ7620_VAL(val: number, maskbit: number): number{
         return val << maskbit;
     }
