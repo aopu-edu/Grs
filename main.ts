@@ -1,8 +1,8 @@
 
 /**
- * 自定义图形块
+ * 识别手势
  */
-//% weight=100 color=#0fbc11 icon=""
+//% weight=100 color=#0fbc11 icon=""
 namespace aopu_gesture {
     
     function PAJ7620_VAL(val: number, maskbit: number): number{
@@ -109,17 +109,8 @@ namespace aopu_gesture {
 		}
     }
 
-    // function getLength(): number{
-    //     return 0;
-    // }
-
-    // function getData(x: number, y: number): number{
-    //     return 0;
-    // }
-
-
     /** 
-     * TODO: 在此处描述您的函数
+     * TODO: 初始化手势识别传感器
      */
     //% block
     export function paj7620Init(): number{
@@ -384,12 +375,6 @@ namespace aopu_gesture {
         }
         basic.showString("su");
 
-		// for (i = 0; i < getLength(); i++) 
-		// {
-        //     // paj7620WriteReg(initRegisterArray[i][0], initRegisterArray[i][1]);
-        //     paj7620WriteReg(getData(i, 0), getData(i, 0));
-            
-		// }
 		basic.pause(DELAY);
 		paj7620SelectBank(bank_e.BANK0);  //gesture flage reg in Bank0
 		
