@@ -1,7 +1,7 @@
 
 // A task runner that calls the PXT compiler and
 {
-    "version": "0.1.0",
+    "version": "0.0.1",
 
     // The command is pxt. Assumes that PXT has been installed using npm install -g pxt
     "command": "pxt",

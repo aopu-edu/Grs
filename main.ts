@@ -109,11 +109,143 @@ namespace aopu_gesture {
 		}
     }
 
+    //%block
+    export function right(): number{
+        return GES_RIGHT_FLAG;
+    }
+
+    //%block
+    export function left(): number{
+        return GES_LEFT_FLAG;
+    }
+
+    //%block
+    export function up(): number{
+        return GES_UP_FLAG;
+    }
+
+    //%block
+    export function down(): number{
+        return GES_DOWN_FLAG;
+    }
+
+    //%block
+    export function forward(): number{
+        return GES_FORWARD_FLAG;
+    }
+
+    //%block
+    export function backward(): number{
+        return GES_BACKWARD_FLAG;
+    }
+
+
+    /** 
+     * TODO: 在此处描述您的函数
+     */
+    //% block
+    export function ReadGesture(): number{
+        let data = 0, data1 = 0, error;
+		data = paj7620ReadReg(0x43, 1);				// Read Bank_0_Reg_0x43/0x44 for gesture result.
+
+        switch (data) 									// When different gestures be detected, the variable 'data' will be set to different values by paj7620ReadReg(0x43, 1, &data).
+        {
+            case GES_RIGHT_FLAG:
+                basic.pause(GES_ENTRY_TIME);
+                data = paj7620ReadReg(0x43, 1);
+                if(data == GES_FORWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_FORWARD_FLAG;
+                }
+                else if(data == GES_BACKWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_BACKWARD_FLAG;
+                }
+                else
+                {
+                    return GES_RIGHT_FLAG;
+                }
+            case GES_LEFT_FLAG: 
+                basic.pause(GES_ENTRY_TIME);
+                data = paj7620ReadReg(0x43, 1);
+                if(data == GES_FORWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_FORWARD_FLAG;
+                }
+                else if(data == GES_BACKWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_BACKWARD_FLAG;
+                }
+                else
+                {
+                    return GES_LEFT_FLAG;
+                }
+            case GES_UP_FLAG:
+                basic.pause(GES_ENTRY_TIME);
+                data = paj7620ReadReg(0x43, 1);
+                if(data == GES_FORWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_FORWARD_FLAG;
+                }
+                else if(data == GES_BACKWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_BACKWARD_FLAG;
+                }
+                else
+                {
+                    return GES_UP_FLAG;
+                }
+            case GES_DOWN_FLAG:
+                basic.pause(GES_ENTRY_TIME);
+                data = paj7620ReadReg(0x43, 1);
+                if(data == GES_FORWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_FORWARD_FLAG;
+                }
+                else if(data == GES_BACKWARD_FLAG) 
+                {
+                    basic.pause(GES_QUIT_TIME);
+                    return GES_BACKWARD_FLAG;
+                }
+                else
+                {
+                    return GES_DOWN_FLAG;
+                }
+            case GES_FORWARD_FLAG:
+                basic.pause(GES_QUIT_TIME);
+                return GES_FORWARD_FLAG;
+            case GES_BACKWARD_FLAG:		  
+                basic.pause(GES_QUIT_TIME);
+                return GES_BACKWARD_FLAG;
+            case GES_CLOCKWISE_FLAG:
+                return GES_CLOCKWISE_FLAG;
+            case GES_COUNT_CLOCKWISE_FLAG:
+                return GES_COUNT_CLOCKWISE_FLAG;
+            default:
+                data1 = paj7620ReadReg(0x44, 1);
+                if (data1 == GES_WAVE_FLAG) 
+                {
+                    return GES_WAVE_FLAG;
+                }
+                return data;
+        }
+        basic.pause(100);
+		return 0;
+    }
+
+    
     /** 
      * TODO: 初始化手势识别传感器
      */
     //% block
-    export function paj7620Init(): number{
+    export function initSensor(): number{
         let i = 0;
 		let error;
 		let data0 = 0, data1 = 0;
@@ -378,107 +510,6 @@ namespace aopu_gesture {
 		basic.pause(DELAY);
 		paj7620SelectBank(bank_e.BANK0);  //gesture flage reg in Bank0
 		
-		return 0;
-    }
-
-
-    /** 
-     * TODO: 在此处描述您的函数
-     */
-    //% block
-    export function ReadGesture(): number{
-        let data = 0, data1 = 0, error;
-		data = paj7620ReadReg(0x43, 1);				// Read Bank_0_Reg_0x43/0x44 for gesture result.
-
-        switch (data) 									// When different gestures be detected, the variable 'data' will be set to different values by paj7620ReadReg(0x43, 1, &data).
-        {
-            case GES_RIGHT_FLAG:
-                basic.pause(GES_ENTRY_TIME);
-                data = paj7620ReadReg(0x43, 1);
-                if(data == GES_FORWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_FORWARD_FLAG;
-                }
-                else if(data == GES_BACKWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_BACKWARD_FLAG;
-                }
-                else
-                {
-                    return GES_RIGHT_FLAG;
-                }
-            case GES_LEFT_FLAG: 
-                basic.pause(GES_ENTRY_TIME);
-                data = paj7620ReadReg(0x43, 1);
-                if(data == GES_FORWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_FORWARD_FLAG;
-                }
-                else if(data == GES_BACKWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_BACKWARD_FLAG;
-                }
-                else
-                {
-                    return GES_LEFT_FLAG;
-                }
-            case GES_UP_FLAG:
-                basic.pause(GES_ENTRY_TIME);
-                data = paj7620ReadReg(0x43, 1);
-                if(data == GES_FORWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_FORWARD_FLAG;
-                }
-                else if(data == GES_BACKWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_BACKWARD_FLAG;
-                }
-                else
-                {
-                    return GES_UP_FLAG;
-                }
-            case GES_DOWN_FLAG:
-                basic.pause(GES_ENTRY_TIME);
-                data = paj7620ReadReg(0x43, 1);
-                if(data == GES_FORWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_FORWARD_FLAG;
-                }
-                else if(data == GES_BACKWARD_FLAG) 
-                {
-                    basic.pause(GES_QUIT_TIME);
-                    return GES_BACKWARD_FLAG;
-                }
-                else
-                {
-                    return GES_DOWN_FLAG;
-                }
-            case GES_FORWARD_FLAG:
-                basic.pause(GES_QUIT_TIME);
-                return GES_FORWARD_FLAG;
-            case GES_BACKWARD_FLAG:		  
-                basic.pause(GES_QUIT_TIME);
-                return GES_BACKWARD_FLAG;
-            case GES_CLOCKWISE_FLAG:
-                return GES_CLOCKWISE_FLAG;
-            case GES_COUNT_CLOCKWISE_FLAG:
-                return GES_COUNT_CLOCKWISE_FLAG;
-            default:
-                data1 = paj7620ReadReg(0x44, 1);
-                if (data1 == GES_WAVE_FLAG) 
-                {
-                    return GES_WAVE_FLAG;
-                }
-                return data;
-        }
-        basic.pause(100);
 		return 0;
     }
 }
