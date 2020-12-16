@@ -234,7 +234,6 @@ namespace aopu_gesture {
                 {
                     return GES_WAVE_FLAG;
                 }
-                return data;
         }
         basic.pause(100);
 		return 0;
