@@ -9,7 +9,7 @@
     "files": [
         "main.ts",
         "README.md",
-        "_locales/zh-cn/Asr-strings.json"
+        "_locales/zh-cn/aopu_gesture-strings.json"
     ],
     "public": true
 }
