@@ -3,7 +3,7 @@
  * 识别手势
  */
 //% weight=100 color=#0fbc11 icon=""
-namespace aopu_gesture {
+namespace Grs {
     
     function PAJ7620_VAL(val: number, maskbit: number): number{
         return val << maskbit;
@@ -144,7 +144,7 @@ namespace aopu_gesture {
      * TODO: 在此处描述您的函数
      */
     //% block
-    export function ReadGesture(): number{
+    export function readGesture(): number{
         let data = 0, data1 = 0, error;
 		data = paj7620ReadReg(0x43, 1);				// Read Bank_0_Reg_0x43/0x44 for gesture result.
 

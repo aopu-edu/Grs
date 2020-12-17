@@ -1,0 +1,10 @@
+{
+  "Grs.initSensor|block": "初始化传感器",
+  "Grs.readGesture|block": "识别手势",
+  "Grs.right|block": "向右",
+  "Grs.left|block": "向左",  
+  "Grs.up|block": "向上",
+  "Grs.down|block": "向下",
+  "Grs.forward|block": "向前",
+  "Grs.backward|block": "向后"
+}
